@@ -17,6 +17,12 @@ import javax.ws.rs.core.MediaType;
  * This resource can provide both XML and JSON response, XML will be default since it
  * is first in the supported list.
  *
+ * Having this as RequestScoped means that this REST resource will only have a scope
+ * of the duration of the request.  Next request will get a new instance.
+ *
+ * Alternatively it could be annotated as Stateless (stateless ejb) and be part
+ * of standard EJB resource pooling with transactional support.
+ *
  * @author thore johnsen
  */
 @Path("example")
