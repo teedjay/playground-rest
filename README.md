@@ -45,12 +45,42 @@ Make sure you use Content-Type application/json when POST'ing and use this examp
 }
 ```
 
-You will get a response back with the same data, but formatted as XML :
+You will get a response back with the same data, but formatted as XML or JSON.
+Note that the text element has been added by the REST call and has a fixed text.
 ```
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <user>
     <name>ole</name>
     <age>78</age>
     <address>oslo</address>
+    <text>This text is from the fixed text service</text>
 </user>
+```
+
+## Testing using CURL
+To post the same query as the Postman example use this curl command :
+```
+curl -X POST -H "Content-Type: application/json" -d '{"name":"ole","age":78,"address":"oslo"}' http://localhost:8080/rest-1.0-SNAPSHOT/rest/example
+```
+
+## XML and JSON response
+The JAX-RS / JAX-WS features of JEE7 will support both XML and JSON response out of the box.
+In our example XML is set as default response but the client can ask for JSON using normal accept header :  
+```
+curl -X POST -H "Content-Type: application/json" -H "Accept: application/json" -d '{"name":"ole","age":78,"address":"oslo"}' http://localhost:8080/rest-1.0-SNAPSHOT/rest/example
+```
+The response will be like this :
+```
+{
+    "name" : "ole",
+    "age" : 78,
+    "address" : "oslo",
+    "text" : "This text is from the fixed text service"
+}
+```
+
+## Debugging
+A debug resource is available that returns all CDI beans in the system, use browser or curl to HTTP GET this.
+```
+curl -i http://localhost:8080/rest-1.0-SNAPSHOT/rest/debug
 ```
