@@ -1,6 +1,8 @@
 package com.teedjay.rest.resources;
 
 import com.teedjay.rest.services.TextService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -23,6 +25,10 @@ import javax.ws.rs.core.MediaType;
  * Alternatively it could be annotated as Stateless (stateless ejb) and be part
  * of standard EJB resource pooling with transactional support.
  *
+ * Also demonstrates how to use external logging using SLF4J.  When first booted
+ * the logback.xml will be read from classpath and used to initialize appenders
+ * and loggers.
+ *
  * @author thore johnsen
  */
 @Path("example")
@@ -30,11 +36,14 @@ import javax.ws.rs.core.MediaType;
 @RequestScoped
 public class ExampleResource {
 
+    private static final Logger log = LoggerFactory.getLogger(ExampleResource.class);
+
     @Inject
     TextService textService;
 
     @POST
     public User createUser(@Valid User input) {
+        log.info("This is SLF4J thru logback creating new user {} aged {}", input.name, input.age );
         input.text = textService.getText();
         return input;
     }

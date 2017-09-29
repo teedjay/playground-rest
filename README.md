@@ -20,15 +20,39 @@ This application runs on any JEE7 application server,
 just copy the war file to your favorite application server or use one of the methods below.
 
 ### Using Payara Micro
-Download the [Payara Microprofile](http://www.payara.fish/downloads) jar file and start it with the war file we just buildt like this.
+Download the latest [Payara Micro](http://www.payara.fish/downloads) jar file and start it with the war file we just buildt like this.
 ```
-java -jar payara-microprofile-1.0-4.1.2.172.jar --deploy target/rest-1.0-SNAPSHOT.war
+java -jar payara-micro-4.1.2.173.jar --deploy target/rest-1.0-SNAPSHOT.war
 ```
 
 Payara Micro will cluster automatically so if you want to run more instances (or start on other ports) use the ```--port``` option.
 ```
-java -jar payara-microprofile-1.0-4.1.2.172.jar --deploy target/rest-1.0-SNAPSHOT.war --port 8081
+java -jar payara-micro-4.1.2.173.jar --deploy target/rest-1.0-SNAPSHOT.war --port 8081
 ```
+
+### Using Payara MicroProfile
+Payara MicroProfile is a scaled down appserver compatible with Eclipse MicroProfile.
+It only supports a subset of JEE features like JAX-RS + CDI + JSON-P, but this is
+usually enough to build microservices and might be an option.  It runs the same way :
+```
+java -jar payara-microprofile-1.0-4.1.2.172.jar --deploy target/rest-1.0-SNAPSHOT.war
+```
+
+## Logging with Payara
+Payara Micro uses Java Util Logging (JUL) and defaults to console output.
+To redirect JUL logging to file just use the logToFile command lone option like this : 
+```
+java -jar payara-micro-4.1.2.173.jar --deploy target/rest-1.0-SNAPSHOT.war --logToFile ./payara-system.log
+```
+
+Take a look at the DebugResource.class on how to use JUL for logging in your own code.
+
+
+### Adding support for SLF4J logging (using Logback)
+If you want your application logging separate from the Payara system logs,
+it is possible is to use SLF4J or other logging frameworks.
+
+Take a look at the ExampleResource on how to enable this.
 
 ## Testing using Postman
 Use the base url below to create a new HTTP POST request :
