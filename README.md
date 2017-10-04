@@ -103,6 +103,19 @@ The response will be like this :
 }
 ```
 
+## Unit Testing and Integration Testing
+Uses SureFire to run unit tests and FailSafe to run all integration tests
+(test classes ending in IT will only be run in the verify phase of maven using FailSafe plugin).
+
+```
+mvn clean test    => runs all unit tests
+mvn clean verify  => run all tests including integration tests 
+```
+
+### Arquillian using Payara container
+The UsersResourceIT test demos how to use Arquillan and RESTAssured to do 
+live REST tests against Payara.
+
 ## Debugging
 A debug resource is available that returns all CDI beans in the system, use browser or curl to HTTP GET this.
 ```
