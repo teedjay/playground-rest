@@ -76,6 +76,31 @@ public class UsersResourceIT {
     }
 
     /**
+     * Smoke test to make sure that bean validation works when create user is called
+     * and that it actually enforces max 10 chars for address field.  It should not
+     * be needed to test all other bean validation variants, as these are tested as
+     * simple and fast unit tests elsewhere.
+     *
+     * Payara should return http 400 status and a default web page containing the text :
+     * "The request sent by the client was syntactically incorrect."
+     */
+    @Test
+    @RunAsClient
+    public void createUserWithIllegalConstrains() {
+        String url = deploymentURL.toExternalForm() + "rest/users";
+        User userToBeCreated = new User("kompis", 33, "adresse som er mer enn 10 tegn", "new user");
+        given().
+            accept("application/json").
+            contentType("application/json").
+            body(userToBeCreated).
+        when().
+            post(url).
+        then().
+            statusCode(400).
+            body(containsString("The request sent by the client was syntactically incorrect."));
+    }
+
+    /**
      * When creating users we expect http 201 created and a location header pointing to the new resource, eg
      * Location=http://localhost:8181/d4c1b452-9575-490b-a015-e3e27aeceae9/rest/users/kompis
      */

@@ -72,7 +72,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- for manual testing bean validation v1.1 (JEE7 has bean validation v1.1) -->
+        <!-- for manual unit testing bean validation v1.1 (JEE7 has bean validation v1.1 built in) -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
@@ -92,7 +92,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- testing with arquillian thru junit -->
+        <!-- testing with arquillian using junit -->
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
