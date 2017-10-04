@@ -55,7 +55,7 @@ public class UsersResourceIT {
         get(url).then().assertThat().
             statusCode(200).
             body("name", is("teedjay")).
-            //body("age", is(17)).
+            body("age", is(17)).
             body("address", is("myaddress")).
             body("text", is("knownuser"));
     }
