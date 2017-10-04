@@ -6,9 +6,9 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
 /**
- * A demo user resource to demonstrate how to test REST using arquillian.
+ * A demo user resource to demonstrate how to test REST using Arquillian.
  *
- * This resource only produce JSON responess and the create user consumes JSON only.
+ * This resource produce and consumes JSON only.
  *
  * @author thore johnsen
  */
