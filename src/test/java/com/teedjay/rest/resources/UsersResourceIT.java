@@ -54,10 +54,10 @@ public class UsersResourceIT {
         String url = deploymentURL.toString() + "rest/users/teedjay";
         get(url).then().assertThat().
             statusCode(200).
-            body("name", is("teedjay")).
-            body("age", is(17)).
-            body("address", is("myaddress")).
-            body("text", is("knownuser"));
+            body("name", is("teedjay"),
+                    "age", is(17),
+                    "address", is("myaddress"),
+                    "text", is("knownuser"));
     }
 
     /**
@@ -89,7 +89,7 @@ public class UsersResourceIT {
     @RunAsClient
     public void createUserWithIllegalConstrains() {
         String url = deploymentURL.toExternalForm() + "rest/users";
-        User userToBeCreated = new User("kompis", 33, "adresse som er mer enn 10 tegn", "new user");
+        User userToBeCreated = new User("kompis", 33, "address more than 10 chars", "new user");
         given().
             accept("application/json").
             contentType("application/json").
