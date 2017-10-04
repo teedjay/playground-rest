@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * handling of XML and JSON marshalling / parsing as well as beans validation enforcement.
  *
  * It needs to have an empty constructor to allow for binding.
+ * Since it is only used as a data structure I have omitted getters/setters.
  *
  * @author thore johnsen
  */

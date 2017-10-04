@@ -87,7 +87,7 @@ public class UsersResourceIT {
      */
     @Test
     @RunAsClient
-    public void createUserWithIllegalConstrains() {
+    public void createUserWithIllegalConstraints() {
         String url = deploymentURL.toExternalForm() + "rest/users";
         User userToBeCreated = new User("kompis", 33, "address more than 10 chars", "new user");
         given().

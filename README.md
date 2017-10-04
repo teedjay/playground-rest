@@ -1,6 +1,17 @@
 # playground-rest
-Testing JEE7, jax-rs, jax-b and beans validation.
+Examples using JEE7 standards like jax-rs and beans validation to make simple REST 
+resources and showing ways to test and run these.
 
+Tech demonstrated in this demo : 
+- [x] Simple pojo's as data input / output for REST resources
+- [x] Automatic mapping between data and json / xml in JAX-RS
+- [x] Automatic Validation of data with Beans Validation
+- [x] CDI for injection of business services
+- [x] Logging to internal Payara log (DebugResource.java)
+- [x] Logging to external log using SLF4J (ExampleResource.java) 
+- [x] Unit testing by injecting mocks using mockito (ExampleResourceTest.java)
+- [x] Unit testing of Beans Validation constraints (UserTest.java)
+- [x] Integration testing REST API with RESTAssured and Arquillian using Payara container (UsersResourceIT.java) 
 
 ## How to build artifacts
 Make sure you have Java 8 and Maven 3 installed and available from the command line.
@@ -13,6 +24,17 @@ mvn clean package
 The built war file will be available under target as shown below and can be deployed to any JEE7 application server.
 ```
 target/rest-1.0-SNAPSHOT.war
+```
+
+## Unit Testing and Integration Testing
+Maven defaults to SureFire for running unit tests.  For integration testing we would 
+like to use the FailSafe plugin (see pom.xml for configuration).
+
+By convention all test classes ending in *IT.java will be run in the verify phase of Maven using FailSafe plugin.
+
+```
+mvn clean test    => runs all unit tests
+mvn clean verify  => run all tests including integration tests 
 ```
 
 ## How to run on different appservers
@@ -39,7 +61,7 @@ java -jar payara-microprofile-1.0-4.1.2.172.jar --deploy target/rest-1.0-SNAPSHO
 ```
 
 ## Logging with Payara
-Payara Micro uses Java Util Logging (JUL) and defaults to console output.
+Payara Micro uses Java Util Logging (JUL) internally and defaults to console output.
 To redirect JUL logging to file just use the logToFile command lone option like this : 
 ```
 java -jar payara-micro-4.1.2.173.jar --deploy target/rest-1.0-SNAPSHOT.war --logToFile ./payara-system.log
@@ -47,14 +69,13 @@ java -jar payara-micro-4.1.2.173.jar --deploy target/rest-1.0-SNAPSHOT.war --log
 
 Take a look at the DebugResource.class on how to use JUL for logging in your own code.
 
-
-### Adding support for SLF4J logging (using Logback)
+### Adding support for external logging (using SLF4J and Logback)
 If you want your application logging separate from the Payara system logs,
-it is possible is to use SLF4J or other logging frameworks.
+it is possible to use SLF4J or other logging frameworks.
 
-Take a look at the ExampleResource on how to enable this.
+Take a look at the ExampleResource on how to enable SLF4J / Logback.
 
-## Testing using Postman
+## Testing REST API using Postman
 Use the base url below to create a new HTTP POST request :
 ```
 http://localhost:8080/rest-1.0-SNAPSHOT/rest/example
@@ -102,19 +123,6 @@ The response will be like this :
     "text" : "This text is from the fixed text service"
 }
 ```
-
-## Unit Testing and Integration Testing
-Uses SureFire to run unit tests and FailSafe to run all integration tests
-(test classes ending in IT will only be run in the verify phase of maven using FailSafe plugin).
-
-```
-mvn clean test    => runs all unit tests
-mvn clean verify  => run all tests including integration tests 
-```
-
-### Arquillian using Payara container
-The UsersResourceIT test demos how to use Arquillan and RESTAssured to do 
-live REST tests against Payara.
 
 ## Debugging
 A debug resource is available that returns all CDI beans in the system, use browser or curl to HTTP GET this.
