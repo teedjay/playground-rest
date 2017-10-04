@@ -61,7 +61,8 @@ public class UsersResourceIT {
     }
 
     /**
-     * The create user resource expects JSON only, make sure XML fails
+     * The create user resource expects JSON only, make sure that posting XML fails.
+     * Payara should return 415 unsupported media type
      */
     @Test
     @RunAsClient
@@ -76,12 +77,12 @@ public class UsersResourceIT {
     }
 
     /**
-     * Smoke test to make sure that bean validation works when create user is called
-     * and that it actually enforces max 10 chars for address field.  It should not
-     * be needed to test all other bean validation variants, as these are tested as
-     * simple and fast unit tests elsewhere.
+     * Smoke test to make sure that bean validation works when create user is called.
+     * It is not necessary to test all bean validation variants as these are tested
+     * already using fast and simple unit tests.
+     * @see UserTest#checkAllConstraints()
      *
-     * Payara should return http 400 status and a default web page containing the text :
+     * Payara returns http 400 status and a default web page containing the text :
      * "The request sent by the client was syntactically incorrect."
      */
     @Test
