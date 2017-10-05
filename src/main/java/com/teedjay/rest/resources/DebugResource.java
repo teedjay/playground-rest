@@ -1,10 +1,8 @@
 package com.teedjay.rest.resources;
 
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Any;
 import javax.enterprise.inject.spi.Bean;
 import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.util.AnnotationLiteral;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -38,9 +36,9 @@ public class DebugResource {
     @GET
     public String listAllBeans() {
         log.log(Level.INFO, "This is JUL logging listing all beans at {0}", LocalDateTime.now());
-        Set<Bean<?>> beans = beanManager.getBeans(Object.class, new AnnotationLiteral<Any>() {});
+        Set<Bean<?>> beans = beanManager.getBeans(Object.class);
         StringJoiner sj = new StringJoiner(",\n", "<cdi>\n", "\n</cdi>\n");
-        beans.stream().forEach(b -> sj.add(b.getBeanClass().getName()));
+        beans.forEach(b -> sj.add(b.getBeanClass().getName()));
         return sj.toString();
     }
 

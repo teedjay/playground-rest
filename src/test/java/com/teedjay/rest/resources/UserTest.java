@@ -67,7 +67,7 @@ public class UserTest {
         User user = new User("ol", 37, "lt10chars", null);
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         assertEquals("Expected  only one violation", 1, violations.size());
-        violations.stream().forEach(v -> assertEquals("size must be between 3 and 2147483647", v.getMessage()));
+        violations.forEach(v -> assertEquals("size must be between 3 and 2147483647", v.getMessage()));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class UserTest {
         User user = new User("ole", -1, "lt10chars", null);
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         assertEquals("Expected  only one violation", 1, violations.size());
-        violations.stream().forEach(v -> assertEquals("the value must be positive", v.getMessage()));
+        violations.forEach(v -> assertEquals("the value must be positive", v.getMessage()));
     }
 
     @Test
@@ -83,7 +83,7 @@ public class UserTest {
         User user = new User("ole", 37, "moreThanTenCharacters", null);
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         assertEquals("Expected  only one violation", 1, violations.size());
-        violations.stream().forEach(v -> assertEquals("size must be between 0 and 10", v.getMessage()));
+        violations.forEach(v -> assertEquals("size must be between 0 and 10", v.getMessage()));
     }
 
 }
