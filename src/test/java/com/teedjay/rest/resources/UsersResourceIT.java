@@ -94,6 +94,7 @@ public class UsersResourceIT {
             accept("application/json").
             contentType("application/json").
             body(userToBeCreated).
+            log().all().
         when().
             post(url).
         then().
