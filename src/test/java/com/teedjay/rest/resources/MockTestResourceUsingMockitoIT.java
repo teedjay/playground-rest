@@ -33,9 +33,11 @@ public class MockTestResourceUsingMockitoIT {
     public static WebArchive createDeployment() {
         return ShrinkWrap
                 .create(WebArchive.class)
-                .addPackage(UsersResource.class.getPackage())
+                //.addPackage(CrazyServiceFactory.class.getPackage())
+                .addPackage(ExampleResource.class.getPackage())
                 .addPackage(TextService.class.getPackage())
                 .addClasses(JAXRSConfig.class)
+                .addClass(CrazyServiceMockFactory.class)
                 ;
     }
 

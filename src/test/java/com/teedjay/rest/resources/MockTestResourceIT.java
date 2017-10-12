@@ -35,9 +35,9 @@ public class MockTestResourceIT {
     public static WebArchive createDeployment() {
         return ShrinkWrap
                 .create(WebArchive.class)
-                .addPackage(UsersResource.class.getPackage())
-                .addPackage(TextService.class.getPackage())
                 .addPackage(CrazyServiceFactory.class.getPackage())
+                .addPackage(ExampleResource.class.getPackage())
+                .addPackage(TextService.class.getPackage())
                 .addClasses(JAXRSConfig.class)
                 .filter(Filters.exclude(CrazyServiceMockFactory.class))
                 ;
