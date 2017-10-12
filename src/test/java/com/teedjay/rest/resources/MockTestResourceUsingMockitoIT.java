@@ -35,7 +35,6 @@ public class MockTestResourceUsingMockitoIT {
                 .create(WebArchive.class)
                 .addPackage(UsersResource.class.getPackage())
                 .addPackage(TextService.class.getPackage())
-                .addClass(CrazyServiceMockFactory.class)
                 .addClasses(JAXRSConfig.class)
                 ;
     }
