@@ -107,7 +107,7 @@
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
-1            <scope>test</scope>
+            <scope>test</scope>
         </dependency>
 
         <!-- using payara embedded as arquillian container -->

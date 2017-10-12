@@ -1,7 +1,7 @@
 package com.teedjay.rest.resources;
 
 import com.teedjay.rest.JAXRSConfig;
-import com.teedjay.rest.factories.CrazyServiceFactory;
+import com.teedjay.rest.factories.CrazyServiceMockFactory;
 import com.teedjay.rest.services.TextService;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -18,13 +18,13 @@ import static io.restassured.RestAssured.get;
 import static org.hamcrest.Matchers.is;
 
 /**
- * This test boots the arquillian container with the real CrazyServiceFactory
- * factory so that we will get REST resonse from the CrazyServiceImpl class.
+ * This test boots the arquillian container with the CrazyServiceMockFactory
+ * so that we will get a mocked instance of the CrazyService.
  *
  * @author thore johnsen
  */
 @RunWith(Arquillian.class)
-public class MockTestResourceIT {
+public class MockTestResourceUsingMockitoIT {
 
     @ArquillianResource
     private URL deploymentURL;
@@ -35,7 +35,7 @@ public class MockTestResourceIT {
                 .create(WebArchive.class)
                 .addPackage(UsersResource.class.getPackage())
                 .addPackage(TextService.class.getPackage())
-                .addPackage(CrazyServiceFactory.class.getPackage())
+                .addClass(CrazyServiceMockFactory.class)
                 .addClasses(JAXRSConfig.class)
                 ;
     }
@@ -44,7 +44,7 @@ public class MockTestResourceIT {
     @RunAsClient
     public void getTextFromCrazyService() {
         String url = deploymentURL.toString() + "rest/mock";
-        get(url).then().assertThat().statusCode(200).body(is("This is crazy text from the external service"));
+        get(url).then().assertThat().statusCode(200).body(is("This is text from the crazy mock"));
     }
 
 }

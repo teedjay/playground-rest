@@ -7,8 +7,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 
 /**
  * Resource used to teste injected mocks when using arquillian for client testing.
@@ -16,7 +14,6 @@ import javax.ws.rs.core.MediaType;
  * @author thore johnsen
  */
 @Path("mock")
-@Produces(MediaType.APPLICATION_XML)
 @RequestScoped
 public class MockTestResource {
 
