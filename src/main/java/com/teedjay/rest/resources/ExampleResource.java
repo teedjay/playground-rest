@@ -7,9 +7,7 @@ import org.slf4j.LoggerFactory;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.validation.Valid;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -46,6 +44,14 @@ public class ExampleResource {
         log.info("This is SLF4J thru logback creating new user {} aged {}", input.name, input.age );
         input.text = textService.getText();
         return input;
+    }
+
+    @GET
+    @Path("{name}")
+    public User fetchUserOrException(@PathParam("name")  String name) {
+        if (name == null || name.isEmpty()) throw new BadRequestException("Missing name");
+        if ("UserNotFound".equalsIgnoreCase(name)) throw new NotFoundException(String.format("No user named %s exists", name));
+        return new User(name, 12, "adresse", "tekst");
     }
 
 }

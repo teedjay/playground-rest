@@ -18,6 +18,12 @@ import javax.inject.Inject;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+/**
+ * Tests the example rest resource from "inside" the container.
+ * Needs the deployment flag testable = true to work.
+ *
+ * @author thore johnsen
+ */
 @RunWith(Arquillian.class)
 public class ExampleResourceIT {
 
