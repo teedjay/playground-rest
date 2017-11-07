@@ -3,15 +3,17 @@ Examples using JEE7 standards like jax-rs and beans validation to make simple RE
 resources and showing ways to test and run these.
 
 Tech demonstrated in this demo : 
-- [x] Simple Java classes as data structures for input / output to REST resources
+- [x] Anemic objects as data-structures for input / output to REST API
 - [x] Automatic mapping between data and JSON / XML using JAX-RS
 - [x] Automatic Validation of input / output data with Beans Validation
+- [x] Automatic description of REST API (WADL for API and XSD for data) 
 - [x] CDI for injection of business services
 - [x] Logging to internal Payara log (DebugResource.java)
 - [x] Logging to external log using SLF4J (ExampleResource.java) 
 - [x] Unit testing by injecting mocks using mockito (ExampleResourceTest.java)
 - [x] Unit testing of Beans Validation constraints (UserTest.java)
 - [x] Integration testing REST API with RESTAssured and Arquillian using Payara container (UsersResourceIT.java)
+- [x] Mocked service using a CDI producer (MockTestResourceUsingMockitoIT)
 
 The ```User.java``` shows how anemic objects can work at the API level to transport
 and validate data structures.  They should not be used inside your domain model and 
@@ -79,13 +81,22 @@ it is possible to use SLF4J or other logging frameworks.
 
 Take a look at the ExampleResource on how to enable SLF4J / Logback.
 
-## Testing REST API using Postman
-Use the base url below to create a new HTTP POST request :
+## Importing the REST API using Postman
+You can import the full REST API by importing the WADL definition into Postman.
+
+The WADL is exposed by JAX-RS as default and it describes all the REST API functions.
+The WADL also links to a XSD file that defines input/output objects of the API. 
+
+Just start the server and import WADL from this url :  [.../rest/application.wadl](http://localhost:8080/rest-1.0-SNAPSHOT/rest/application.wadl)
+
+Now you can crate a new HTTP POST request to the example resource :
 ```
 http://localhost:8080/rest-1.0-SNAPSHOT/rest/example
 ```
 
-Make sure you use Content-Type application/json when POST'ing and use this example JSON :
+To see the data formats used by the api look at this url [.../rest/application.wadl/xsd0.xsd](localhost:8080/rest-1.0-SNAPSHOT/rest/application.wadl/xsd0.xsd).
+
+Make sure you use correct Content-Type application/json when POST'ing JSON and use this example data :
 ```
 {
 	"name" : "ole",
