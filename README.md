@@ -3,15 +3,19 @@ Examples using JEE7 standards like jax-rs and beans validation to make simple RE
 resources and showing ways to test and run these.
 
 Tech demonstrated in this demo : 
-- [x] Simple pojo's as data input / output for REST resources
-- [x] Automatic mapping between data and json / xml in JAX-RS
-- [x] Automatic Validation of data with Beans Validation
+- [x] Simple Java classes as data structures for input / output to REST resources
+- [x] Automatic mapping between data and JSON / XML using JAX-RS
+- [x] Automatic Validation of input / output data with Beans Validation
 - [x] CDI for injection of business services
 - [x] Logging to internal Payara log (DebugResource.java)
 - [x] Logging to external log using SLF4J (ExampleResource.java) 
 - [x] Unit testing by injecting mocks using mockito (ExampleResourceTest.java)
 - [x] Unit testing of Beans Validation constraints (UserTest.java)
-- [x] Integration testing REST API with RESTAssured and Arquillian using Payara container (UsersResourceIT.java) 
+- [x] Integration testing REST API with RESTAssured and Arquillian using Payara container (UsersResourceIT.java)
+
+The ```User.java``` shows how anemic objects can work at the API level to transport
+and validate data structures.  They should not be used inside your domain model and 
+business logic directly but mapped to real domain objects at the API level.  
 
 ## How to build artifacts
 Make sure you have Java 8 and Maven 3 installed and available from the command line.

@@ -1,7 +1,7 @@
 package com.teedjay.rest.services;
 
 /**
- * Default implementation for the CrzyService just returns a string with a text.
+ * Default implementation for the CrazyService just returns a string with a text.
  *
  * @author thore johnsen
  */
