@@ -43,6 +43,10 @@ mvn clean test    => runs all unit tests
 mvn clean verify  => run all tests including integration tests 
 ```
 
+Note for Mac-users : Running the full ```mvn clean verify``` should take around 14 seconds on a MacBook Pro,
+if you experience 30 seconds make sure your hostname resolves to localhost for both IP4 and IP6 in 
+your ```etc/hosts``` settings.  Follow these [instructions](https://thoeni.io/post/macos-sierra-java/). 
+
 ## How to run on different appservers
 This application runs on any JEE7 application server, 
 just copy the war file to your favorite application server or use one of the methods below.
